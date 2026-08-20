@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Digital - Keiza Rahma</title>
+    
+    <!-- Font Latin untuk Nama di Beranda -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- 
+      CATATAN UNTUK PENGUMPULAN TUGAS (PENGEMBANGAN MULTI-HALAMAN):
+      Pindahkan seluruh isi dari tag <style> ini ke dalam file assets/css/style.css
+      Lalu gunakan tag link berikut di setiap halaman:
+      - Untuk index.html: <link rel="stylesheet" href="assets/css/style.css">
+      - Untuk file di dalam folder pages/: <link rel="stylesheet" href="../assets/css/style.css">
+    -->
+    <style>
+        /* ==========================================================================
+           1. VARIABEL WARNA & RESET DASAR
+           ========================================================================== */
+        :root {
+            --primary-color: #be185d;       /* Deep Pink Rose / Warna Utama */
+            --primary-hover: #9d174d;       /* Hover Deep Pink */
+            --secondary-color: #db2777;     /* Bright Pink Accent */
+            --bg-body: #fdf2f8;             /* Pink Muda Soft */
+            --bg-card: #ffffff;             /* Latar Kartu Putih Bersih */
+            --text-main: #331825;           /* Teks Utama Gelap Soft */
+            --text-muted: #83546a;          /* Teks Sekunder */
+            --border-color: #fbcfe8;        /* Pembatas Soft Pink */
+            --shadow-sm: 0 2px 6px rgba(190, 24, 93, 0.06);
+            --shadow-md: 0 4px 14px rgba(190, 24, 93, 0.12);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            /* Latar belakang gradasi putih dan pink sesuai permintaan */
+            background: linear-gradient(135deg, #ffffff 0%, #fbcfe8 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGASI MODULAR
+           ========================================================================== */
+        .site-header {
+            background-color: transparent;
+            /* Motif Polkadot Bulat Pink & Putih */
+            background-image: 
+                radial-gradient(rgba(244, 114, 182, 0.5) 15%, transparent 16%),
+                radial-gradient(rgba(255, 255, 255, 0.8) 15%, transparent 16%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            border-bottom: 1px solid rgba(251, 207, 232, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: none;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0.75rem auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .brand-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .brand-logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            background-color: #fdf2f8;
+        }
+
+        /* ==========================================================================
+           3. KOMPONEN UI UMUM
+           ========================================================================== */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(190, 24, 93, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(190, 24, 93, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: #fdf2f8;
+        }
+
+        .btn-card-action {
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: auto;
+            display: block;
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-section {
+            display: none; 
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        /* ==========================================================================
+           4. STYLES HALAMAN BERANDA
+           ========================================================================== */
+        .hero-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            background-color: var(--bg-card);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-greeting {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-title {
+            font-family: 'Dancing Script', cursive; /* Font Latin */
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-status {
+            display: inline-block;
+            background-color: #fdf2f8;
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 1.75rem;
+            max-width: 90%;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .hero-image-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 15px 25px rgba(190, 24, 93, 0.25));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 0 auto;
+        }
+
+        .hero-image-wrapper:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .heart-frame-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #fbcfe8 0%, #be185d 50%, #db2777 100%);
+            -webkit-clip-path: url(#heart-clip);
+            clip-path: url(#heart-clip);
+            z-index: 0;
+        }
+
+        .hero-avatar {
+            width: 260px;
+            height: 260px;
+            object-fit: cover;
+            -webkit-clip-path: url(#heart-clip);
+            clip-path: url(#heart-clip);
+            z-index: 1;
+            position: relative;
+            display: block;
+        }
+
+        .frame-badge {
+            position: absolute;
+            bottom: 25px;
+            right: -10px;
+            background: #ffffff;
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Skills Summary */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary-color);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .skill-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* ==========================================================================
+           5. STYLES KARTU DRAFT MODUL (REUSABLE UNTUK IOT, JARINGAN, PROYEK)
+           ========================================================================== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .module-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .module-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background-color: #fdf2f8;
+            color: var(--secondary-color);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            width: max-content;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* ==========================================================================
+           6. STYLES HALAMAN TENTANG SAYA (TAMPILAN AESTHETIC & RAPI)
+           ========================================================================== */
+        .about-hero-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fce7f3 100%);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-hero-icon { font-size: 3rem; }
+        .about-hero-title { color: var(--primary-color); font-size: 1.3rem; margin-bottom: 0.25rem; }
+        .about-hero-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 2rem;
+        }
+
+        .biodata-card {
+            background-color: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .card-heading-icon {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .biodata-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .biodata-table th, .biodata-table td {
+            padding: 0.85rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.92rem;
+        }
+
+        .biodata-table th {
+            color: var(--primary-color);
+            font-weight: 600;
+            width: 38%;
+        }
+
+        .motto-card {
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, #fff0f5 0%, #fce7f3 100%);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary-color);
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .gallery-container-card {
+            background-color: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-card-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px solid #ffffff;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-badge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(190, 24, 93, 0.85);
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .timeline-box {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            margin-top: 1.5rem;
+        }
+
+        .timeline-list {
+            list-style: none;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border-color);
+            margin-top: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            font-size: 0.88rem;
+        }
+
+        .timeline-item::before {
+            content: "🌸";
+            position: absolute;
+            left: -1.7rem;
+            top: -2px;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           6B. STYLES KOTAK HIGHLIGHT & FOOTER TENTANG SAYA
+           ========================================================================== */
+        .highlights-section {
+            margin-top: 2.5rem;
+        }
+        
+        .highlights-subtitle {
+            margin-bottom: 1rem; 
+            font-size: 1rem; 
+            color: var(--text-muted);
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--secondary-color);
+        }
+
+        .highlight-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .about-footer-banner {
+            margin-top: 2.5rem;
+            background: linear-gradient(135deg, #be185d 0%, #db2777 100%);
+            color: #ffffff;
+            padding: 2rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-footer-banner::after {
+            content: "✨";
+            position: absolute;
+            right: 1.5rem;
+            bottom: -0.5rem;
+            font-size: 5rem;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .about-footer-text h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .about-footer-text p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+
+        .about-footer-action .btn-white {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .about-footer-action .btn-white:hover {
+            background-color: #fdf2f8;
+            transform: scale(1.05);
+        }
+
+        /* ==========================================================================
+           7. STYLES FORMULIR KONTAK
+           ========================================================================== */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-form {
+            background-color: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(190, 24, 93, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .info-sidebar {
+            background-color: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+        
+        .sidebar-text {
+            margin-top: 1rem; 
+            color: var(--text-muted); 
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           8. FOOTER UMUM HALAMAN
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Layout adjustment */
+        @media (max-width: 768px) {
+            .hero-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .about-container, .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            
+            .about-footer-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <clipPath id="heart-clip" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,0.9 C0.5,0.9 0.05,0.6 0.05,0.3 C0.05,0.1 0.25,0 0.4,0.1 C0.45,0.15 0.5,0.25 0.5,0.25 C0.5,0.25 0.55,0.15 0.6,0.1 C0.75,0 0.95,0.1 0.95,0.3 C0.95,0.6 0.5,0.9 0.5,0.9 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <!-- ==========================================================================
+         1. NAVIGASI MODULAR (HEADER & NAVBAR)
+         ========================================================================== -->
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="brand-logo">Portofolio</div>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" onclick="switchTab('beranda')">Beranda</a></li>
+                <li><a class="nav-link" onclick="switchTab('tentang')">Tentang Saya</a></li>
+                <li><a class="nav-link" onclick="switchTab('jaringan')">Jaringan Komputer</a></li>
+                <li><a class="nav-link" onclick="switchTab('iot')">IoT & Arduino</a></li>
+                <li><a class="nav-link" onclick="switchTab('proyek')">Galeri Proyek</a></li>
+                <li><a class="nav-link" onclick="switchTab('kontak')">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ==========================================================================
+         MAIN CONTENT AREA
+         ========================================================================== -->
+    <main>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 1: BERANDA (index.html)
+             ---------------------------------------------------------------------- -->
+        <section id="beranda" class="page-section active-page">
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <p class="hero-greeting">Halo 👋, Selamat Datang!</p>
+                    <h1 class="hero-title">Keiza Rahma</h1>
+                    <span class="hero-status">Siswa Kelas XII - Peminatan Rekayasa Perangkat Lunak / Informatika</span>
+                    <p class="hero-description">
+                        Selamat datang di etalase portofolio digital saya. Halaman ini mendokumentasikan hasil pembelajaran praktikum, modul tugas, serta proyek rekayasa perangkat lunak sepanjang tahun ajaran berjalan.
+                    </p>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="switchTab('proyek')">Lihat Proyek Saya</button>
+                        <button class="btn btn-secondary" onclick="switchTab('kontak')">Hubungi Saya</button>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <div class="heart-frame-bg"></div>
+                    <img id="profile-img" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop" 
+                         onerror="this.src='https://placehold.co/400x400/fbcfe8/be185d?text=Foto+Dummy'" 
+                         alt="Foto Profil Keiza Rahma" class="hero-avatar">
+                    <div class="frame-badge">✨ Keiza Rahma</div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2 class="section-title">Ringkasan Keahlian</h2>
+                <p class="section-subtitle">Kompetensi teknis dan dasar pemrograman yang dipelajari</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <div class="skill-name">HTML5 & CSS3</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🖥️</div>
+                    <div class="skill-name">Jaringan Dasar</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤖</div>
+                    <div class="skill-name">IoT & Arduino</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <div class="skill-name">Pemrograman Dasar</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🧩</div>
+                    <div class="skill-name">Problem Solving</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 2: TENTANG SAYA (pages/tentang.html)
+             ---------------------------------------------------------------------- -->
+        <section id="tentang" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">Tentang Saya</h2>
+                <p class="section-subtitle">Profil pribadi, biodata akademis, dan pengalaman belajar praktikum Informatika</p>
+            </div>
+
+            <!-- Kartu Highlight Singkat Profil -->
+            <div class="about-hero-card">
+                <div class="about-hero-icon">🎀</div>
+                <div>
+                    <h3 class="about-hero-title">Keiza Rahma — Passionate Tech Enthusiast</h3>
+                    <p class="about-hero-desc">
+                        Siswi Kelas XII Informatika yang berfokus pada pengembangan antarmuka web modern, eksplorasi jaringan komputer, dan rancangan sistem cerdas IoT.
+                    </p>
+                </div>
+            </div>
+
+            <div class="about-container">
+                <!-- Kolom Kiri: Tabel Biodata & Quote -->
+                <div>
+                    <div class="biodata-card">
+                        <h3 class="card-heading-icon">📝 Biodata Lengkap</h3>
+                        <table class="biodata-table">
+                            <tr>
+                                <th>👤 Nama Lengkap</th>
+                                <td>Keiza Rahma</td>
+                            </tr>
+                            <tr>
+                                <th>🎓 Kelas</th>
+                                <td>XII Informatika 1</td>
+                            </tr>
+                            <tr>
+                                <th>💻 Peminatan</th>
+                                <td>Rekayasa Perangkat Lunak</td>
+                            </tr>
+                            <tr>
+                                <th>🏫 Sekolah</th>
+                                <td>SMAN / SMKN 1 Industri</td>
+                            </tr>
+                            <tr>
+                                <th>📍 Lokasi</th>
+                                <td>Mojokerto, Jawa Timur</td>
+                            </tr>
+                            <tr>
+                                <th>✨ Minat Utama</th>
+                                <td>Frontend & UI/UX Design</td>
+                            </tr>
+                        </table>
+
+                        <div class="motto-card">
+                            💬 <strong>Motto:</strong> "Belajar pemrograman bukan hanya menulis baris kode, tapi memecahkan masalah dengan cara yang kreatif."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Kanan: Galeri Aktivitas & Timeline -->
+                <div>
+                    <div class="gallery-container-card">
+                        <h3 class="card-heading-icon">📸 Galeri Praktikum & Diskusi</h3>
+                        <p class="section-subtitle" style="margin-bottom: 0.75rem;">Dokumentasi kegiatan belajar di Laboratorium Komputer</p>
+                        
+                        <div class="gallery-grid">
+                            <div class="gallery-card-item">
+                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x300/fbcfe8/831843?text=Jaringan+Lab'" alt="Foto Praktikum Jaringan" class="gallery-item">
+                                <div class="gallery-badge">🌐 Lab Jaringan</div>
+                            </div>
+                            <div class="gallery-card-item">
+                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x300/fbcfe8/831843?text=Rakit+Arduino'" alt="Foto Rakit Microcontroller" class="gallery-item">
+                                <div class="gallery-badge">🤖 Praktikum IoT</div>
+                            </div>
+                            <div class="gallery-card-item">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x300/fbcfe8/831843?text=Coding+Lab'" alt="Foto Coding Lab" class="gallery-item">
+                                <div class="gallery-badge">💻 Sesi Coding</div>
+                            </div>
+                            <div class="gallery-card-item">
+                                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x300/fbcfe8/831843?text=Diskusi+Kelompok'" alt="Foto Diskusi Kelompok" class="gallery-item">
+                                <div class="gallery-badge">🤝 Kerja Kelompok</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Jejak Belajar -->
+                    <div class="timeline-box">
+                        <h4 class="card-heading-icon">📌 Timeline Pembelajaran Kelas XII</h4>
+                        <ul class="timeline-list">
+                            <li class="timeline-item">
+                                <strong>Semester 1:</strong> Pendalaman Pemrograman Web Responsif & Simulasi Topologi Jaringan Cisco.
+                            </li>
+                            <li class="timeline-item">
+                                <strong>Semester 2:</strong> Proyek Mikrokontroler IoT (Sensor & Aktuator) serta Persiapan UKK Perangkat Lunak.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Kotak-Kotak Fokus & Pencapaian Utama -->
+            <div class="highlights-section">
+                <h3 class="about-hero-title">✨ Fokus & Target Utama</h3>
+                <p class="highlights-subtitle">Milestone kunci dan prinsip belajar sepanjang tahun ajaran</p>
+                
+                <div class="about-highlights">
+                    <div class="highlight-box">
+                        <div class="highlight-icon">🎯</div>
+                        <div class="highlight-title">Target Karir</div>
+                        <div class="highlight-desc">Menjadi Frontend Developer & UI/UX Designer yang handal dan adaptif terhadap standar industri.</div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <div class="highlight-icon">🏆</div>
+                        <div class="highlight-title">Persiapan UKK</div>
+                        <div class="highlight-desc">Mempersiapkan Uji Kompetensi Keahlian Rekayasa Perangkat Lunak dengan karya portofolio unggulan.</div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <div class="highlight-icon">💡</div>
+                        <div class="highlight-title">Prinsip Belajar</div>
+                        <div class="highlight-desc">"Continuous Learning" — Aktif mengeksplorasi teknologi baru dan konsisten latihan algoritma.</div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <div class="highlight-icon">🤝</div>
+                        <div class="highlight-title">Kolaborasi Tim</div>
+                        <div class="highlight-desc">Terbiasa bekerja sama dalam proyek praktikum kelompok, penyusunan laporan, dan debugging.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner Footer Menarik Khusus Halaman Tentang Saya -->
+            <div class="about-footer-banner">
+                <div class="about-footer-text">
+                    <h3>Tertarik Berkolaborasi atau Diskusi Proyek? 🚀</h3>
+                    <p>Saya terbuka untuk masukan, diskusi tugas praktikum, maupun ajakan proyek kolaborasi Informatika!</p>
+                </div>
+                <div class="about-footer-action">
+                    <button class="btn-white" onclick="switchTab('kontak')">Hubungi Keiza 📩</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 3: MODUL JARINGAN KOMPUTER (pages/jaringan.html)
+             ---------------------------------------------------------------------- -->
+        <section id="jaringan" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">Modul Jaringan Komputer</h2>
+                <p class="section-subtitle">Dokumentasi tugas & praktikum konfigurasi jaringan (Cisco Packet Tracer / IP Setup)</p>
+            </div>
+
+            <div class="card-grid">
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=IP+Subnetting'" alt="Topology Diagram" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Modul 01</span>
+                        <h3 class="card-title">Konfigurasi IP Address & Subnetting</h3>
+                        <p class="card-text">Dokumentasi perhitungan Subnet Mask (VLSM/CIDR) serta alokasi IP statis pada jaringan LAN laboratorium.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Baca Selengkapnya</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=Cisco+Packet+Tracer'" alt="Packet Tracer Screenshot" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Modul 02</span>
+                        <h3 class="card-title">Simulasi Topologi Jaringan Cisco</h3>
+                        <p class="card-text">Simulasi jaringan Star dengan Router, Switch, dan Client menggunakan Cisco Packet Tracer.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Baca Selengkapnya</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=Protocol+Analysis'" alt="Wireshark Log" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Modul 03</span>
+                        <h3 class="card-title">Analisis Protokol HTTP & DNS</h3>
+                        <p class="card-text">Pengamatan lalu lintas data dan pencarian domain DNS menggunakan utilitas komando terminal dan Wireshark.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Baca Selengkapnya</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 4: IOT & ARDUINO (pages/iot-arduino.html)
+             ---------------------------------------------------------------------- -->
+        <section id="iot" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">Modul Internet of Things (IoT)</h2>
+                <p class="section-subtitle">Dokumentasi skematik, kode mikrokontroler C/C++, dan eksperimen sensor</p>
+            </div>
+
+            <div class="card-grid">
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=DHT11+Sensor'" alt="Wokwi Schematic" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Arduino / ESP32</span>
+                        <h3 class="card-title">Monitoring Suhu & Kelembapan (DHT11)</h3>
+                        <p class="card-text">Pembacaan data sensor DHT11 yang ditampilkan secara real-time melalui layar LCD 16x2 I2C.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Lihat Skematik & Kode</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=Servo+System'" alt="Servo Circuit" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Aktuator</span>
+                        <h3 class="card-title">Sistem Palang Otomatis (Servo)</h3>
+                        <p class="card-text">Pengendalian motor servo berdasarkan deteksi jarak objek menggunakan sensor Ultrasonic HC-SR04.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Lihat Skematik & Kode</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=RFID+Security'" alt="RFID Security" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Keamanan Pintar</span>
+                        <h3 class="card-title">Akses Pintu Cerdas (RFID)</h3>
+                        <p class="card-text">Sistem prototipe pengunci pintu otomatis menggunakan modul pemindai kartu RFID MFRC522 dan Indikator LED.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Lihat Skematik & Kode</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1592659762303-e0088b2550c1?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=Smart+Agriculture'" alt="Smart Farm" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Smart Agriculture</span>
+                        <h3 class="card-title">Penyiram Tanaman Otomatis</h3>
+                        <p class="card-text">Alat yang membaca kelembapan tanah (Soil Moisture Sensor) untuk memicu hidupnya pompa air mini secara otomatis.</p>
+                        <a href="#" class="btn btn-secondary btn-card-action">Lihat Skematik & Kode</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 5: GALERI PROYEK (pages/karya-proyek.html)
+             ---------------------------------------------------------------------- -->
+        <section id="proyek" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">Galeri Karya & Proyek</h2>
+                <p class="section-subtitle">Kumpulan repositori dan hasil proyek aplikasi atau web yang pernah dikembangkan</p>
+            </div>
+
+            <div class="card-grid">
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=Web+Profil'" alt="UI App Preview" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Web Development</span>
+                        <h3 class="card-title">Website Profil Sekolah</h3>
+                        <p class="card-text">Proyek pembuat website profil interaktif menggunakan HTML, CSS Grid, dan JavaScript dasar.</p>
+                        <a href="#" class="btn btn-primary btn-card-action">Lihat Repositori GitHub</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=App+Kasir+C%2B%2B'" alt="CLI Software" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">C++ Algoritma</span>
+                        <h3 class="card-title">Aplikasi Kasir Sederhana</h3>
+                        <p class="card-text">Program konsol berbasis C++ untuk menghitung transaksi belanja dan diskon berbasis aturan.</p>
+                        <a href="#" class="btn btn-primary btn-card-action">Lihat Repositori GitHub</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=UI+UX+Design'" alt="Mobile App UI" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">UI/UX Design</span>
+                        <h3 class="card-title">Mockup Aplikasi Edukasi</h3>
+                        <p class="card-text">Desain antarmuka aplikasi pembelajaran online untuk mobile menggunakan platform Figma.</p>
+                        <a href="#" class="btn btn-primary btn-card-action">Lihat Prototipe Figma</a>
+                    </div>
+                </article>
+
+                <article class="module-card">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&auto=format&fit=crop" onerror="this.src='https://placehold.co/400x200/fbcfe8/be185d?text=E-Commerce+Web'" alt="E-Commerce Web" class="card-img">
+                    <div class="card-body">
+                        <span class="card-badge">Web Development</span>
+                        <h3 class="card-title">Landing Page E-Commerce</h3>
+                        <p class="card-text">Tampilan halaman depan toko online interaktif dengan fitur simulasi keranjang belanja menggunakan JavaScript.</p>
+                        <a href="#" class="btn btn-primary btn-card-action">Lihat Demo Live</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             HALAMAN 6: FORMULIR KONTAK (pages/kontak.html)
+             ---------------------------------------------------------------------- -->
+        <section id="kontak" class="page-section">
+            <div class="section-header">
+                <h2 class="section-title">Hubungi Saya</h2>
+                <p class="section-subtitle">Kirimkan pesan masukan, pertanyaan, atau ajakan kolaborasi</p>
+            </div>
+
+            <div class="contact-layout">
+                <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim.');">
+                    <div class="form-group">
+                        <label for="nama" class="form-label">Nama Pengirim</label>
+                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Alamat Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="contoh@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategori" class="form-label">Kategori Pesan</label>
+                        <select id="kategori" name="kategori" class="form-control">
+                            <option value="pertanyaan">Pertanyaan</option>
+                            <option value="kolaborasi">Kolaborasi Proyek</option>
+                            <option value="saran">Saran & Masukan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pesan" class="form-label">Pesan Teks</label>
+                        <textarea id="pesan" name="pesan" class="form-control" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                </form>
+
+                <aside class="info-sidebar">
+                    <h3>Kontak Alternatif</h3>
+                    <p class="sidebar-text">
+                        <strong>Email Pribadi/Sekolah:</strong><br>
+                        keiza.rahmawardhani19@sma.belajar.id
+                    </p>
+                    <p class="sidebar-text">
+                        <strong>Lokasi:</strong><br>
+                        Kota Mojokerto, Jawa Timur
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Keiza Rahma. Hak Cipta Dilindungi Undang-Undang.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">GitHub</a>
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PREVIEW INTERAKTIF TAB & UNGGAH FOTO -->
+    <script>
+        // Fungsi untuk Navigasi Antar Tab Halaman
+        function switchTab(tabId) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active-page');
+            });
+            // Hapus status active di menu navigasi
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Tampilkan section yang dipilih
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) {
+                targetSection.classList.add('active-page');
+            }
+
+            // Tandai nav item yang diklik (jika diklik dari navbar)
+            if (event && event.currentTarget && event.currentTarget.classList) {
+                event.currentTarget.classList.add('active');
+            } else {
+                // Handle kasus jika dipanggil via button (misal dari banner footer ke kontak)
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    if(link.getAttribute('onclick').includes(tabId)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Scroll ke atas dengan halus setiap ganti tab
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
